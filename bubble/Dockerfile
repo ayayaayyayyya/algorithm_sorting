@@ -1,13 +1,14 @@
-FROM python:3.11-slim
+FROM python:3.9-slim
 
+# 작업 디렉토리 설정
 WORKDIR /app
 
-ENV PYTHONUNBUFFERED=1
-ENV PORT=8080
+# 요구사항 파일 복사 및 설치
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# requirements.txt를 복사하는 대신 필요한 패키지를 직접 명시해서 설치합니다.
-RUN pip install --no-cache-dir Flask==3.0.3 gunicorn==22.0.0
-
+# 소스 코드 복사
 COPY . .
 
-CMD exec gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 main:app
+# Gunicorn을 사용하여 Flask 앱 실행 (반드시 $PORT 사용)
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
