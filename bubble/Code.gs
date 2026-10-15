@@ -1,7 +1,7 @@
 
 function callCloudRunServer() {
   // Cloud Run 배포 후 생성된 URL로 변경
-  var url = "https://your-cloud-run-service-url.a.run.app/api"; 
+  var url = "https://algorithm-sorting-git-125683312072.europe-west1.run.app"; 
   
   var payload = {
     "data": "Sample data from Google Apps Script"
